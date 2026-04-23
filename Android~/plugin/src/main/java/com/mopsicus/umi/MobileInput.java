@@ -439,6 +439,7 @@ public class MobileInput {
             }
             final MobileInput input = this;
             edit.setOnFocusChangeListener((v, isFocus) -> {
+                Log.d("[UMI]", String.format("onFocusChange id=%d isFocus=%b", id, isFocus));
                 if (!isFocus) {
                     JSONObject editData = new JSONObject();
                     try {
@@ -463,6 +464,7 @@ public class MobileInput {
                 sendData(focusData);
             });
             edit.setOnClickListener(v -> {
+                Log.d("[UMI]", String.format("onClick id=%d hasFocus=%b", id, edit.hasFocus()));
                 showKeyboard(true);
             });
             edit.addTextChangedListener(new TextWatcher() {
@@ -717,6 +719,7 @@ public class MobileInput {
      * @param isFocus State for input
      */
     private void SetFocus(boolean isFocus) {
+        Log.d("[UMI]", String.format("SetFocus id=%d isFocus=%b hasFocus=%b", id, isFocus, edit != null && edit.hasFocus()));
         if (edit == null) {
             return;
         }
@@ -830,8 +833,10 @@ public class MobileInput {
         InputMethodManager imm = (InputMethodManager) Plugin.activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         View rootView = Plugin.activity.getWindow().getDecorView();
         if (isShow) {
-            imm.showSoftInput(edit, InputMethodManager.SHOW_FORCED);
+            boolean result = imm.showSoftInput(edit, InputMethodManager.SHOW_FORCED);
+            Log.d("[UMI]", String.format("showKeyboard SHOW id=%d result=%b hasFocus=%b windowToken=%s", id, result, edit.hasFocus(), edit.getWindowToken()));
         } else {
+            Log.d("[UMI]", String.format("showKeyboard HIDE id=%d", id));
             edit.clearFocus();
             rootView.clearFocus();
             imm.hideSoftInputFromWindow(edit.getWindowToken(), 0);
