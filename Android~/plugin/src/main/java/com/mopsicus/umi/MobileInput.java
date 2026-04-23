@@ -439,7 +439,7 @@ public class MobileInput {
             }
             final MobileInput input = this;
             edit.setOnFocusChangeListener((v, isFocus) -> {
-                Log.d("[UMI]", String.format("onFocusChange id=%d isFocus=%b", id, isFocus));
+                Log.w("[UMI]", String.format("onFocusChange id=%d isFocus=%b", id, isFocus));
                 if (!isFocus) {
                     JSONObject editData = new JSONObject();
                     try {
@@ -464,7 +464,7 @@ public class MobileInput {
                 sendData(focusData);
             });
             edit.setOnClickListener(v -> {
-                Log.d("[UMI]", String.format("onClick id=%d hasFocus=%b", id, edit.hasFocus()));
+                Log.w("[UMI]", String.format("onClick id=%d hasFocus=%b", id, edit.hasFocus()));
                 showKeyboard(true);
             });
             edit.addTextChangedListener(new TextWatcher() {
@@ -543,7 +543,7 @@ public class MobileInput {
                 insetDrawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                 edit.setTextCursorDrawable(insetDrawable);
                 if (Plugin.bridge.isDebug) {
-                    Log.d("[UMI]", String.format("set caret cursor: %s", color));
+                    Log.w("[UMI]", String.format("set caret cursor: %s", color));
                 }
             }
             if (edit.getTextSelectHandle() instanceof BitmapDrawable) {
@@ -551,7 +551,7 @@ public class MobileInput {
                 insetDrawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                 edit.setTextSelectHandle(insetDrawable);
                 if (Plugin.bridge.isDebug) {
-                    Log.d("[UMI]", String.format("set caret handle: %s", color));
+                    Log.w("[UMI]", String.format("set caret handle: %s", color));
                 }
             }
             if (edit.getTextSelectHandleRight() instanceof BitmapDrawable) {
@@ -559,7 +559,7 @@ public class MobileInput {
                 insetDrawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                 edit.setTextSelectHandleRight(insetDrawable);
                 if (Plugin.bridge.isDebug) {
-                    Log.d("[UMI]", String.format("set caret handle right: %s", color));
+                    Log.w("[UMI]", String.format("set caret handle right: %s", color));
                 }
             }
             if (edit.getTextSelectHandleLeft() instanceof BitmapDrawable) {
@@ -567,7 +567,7 @@ public class MobileInput {
                 insetDrawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                 edit.setTextSelectHandleLeft(insetDrawable);
                 if (Plugin.bridge.isDebug) {
-                    Log.d("[UMI]", String.format("set caret handle left: %s", color));
+                    Log.w("[UMI]", String.format("set caret handle left: %s", color));
                 }
             }
         } else {
@@ -636,7 +636,7 @@ public class MobileInput {
      */
     private void setKeyboardLanguage(String languageCode) {
         if (Plugin.bridge.isDebug) {
-            Log.d("[UMI]", String.format("set keyboard language: %s", languageCode));
+            Log.w("[UMI]", String.format("set keyboard language: %s", languageCode));
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             edit.setImeHintLocales(UpdateLocaleList(languageCode));
@@ -719,7 +719,7 @@ public class MobileInput {
      * @param isFocus State for input
      */
     private void SetFocus(boolean isFocus) {
-        Log.d("[UMI]", String.format("SetFocus id=%d isFocus=%b hasFocus=%b", id, isFocus, edit != null && edit.hasFocus()));
+        Log.w("[UMI]", String.format("SetFocus id=%d isFocus=%b hasFocus=%b", id, isFocus, edit != null && edit.hasFocus()));
         if (edit == null) {
             return;
         }
@@ -834,9 +834,9 @@ public class MobileInput {
         View rootView = Plugin.activity.getWindow().getDecorView();
         if (isShow) {
             boolean result = imm.showSoftInput(edit, InputMethodManager.SHOW_FORCED);
-            Log.d("[UMI]", String.format("showKeyboard SHOW id=%d result=%b hasFocus=%b windowToken=%s", id, result, edit.hasFocus(), edit.getWindowToken()));
+            Log.w("[UMI]", String.format("showKeyboard SHOW id=%d result=%b hasFocus=%b windowToken=%s", id, result, edit.hasFocus(), edit.getWindowToken()));
         } else {
-            Log.d("[UMI]", String.format("showKeyboard HIDE id=%d", id));
+            Log.w("[UMI]", String.format("showKeyboard HIDE id=%d", id));
             edit.clearFocus();
             rootView.clearFocus();
             imm.hideSoftInputFromWindow(edit.getWindowToken(), 0);
