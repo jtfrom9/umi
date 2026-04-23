@@ -462,6 +462,9 @@ public class MobileInput {
                 }
                 sendData(focusData);
             });
+            edit.setOnClickListener(v -> {
+                showKeyboard(true);
+            });
             edit.addTextChangedListener(new TextWatcher() {
                 public void afterTextChanged(Editable s) {
                     JSONObject data = new JSONObject();
