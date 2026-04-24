@@ -16,7 +16,9 @@ public class KeyboardListener implements KeyboardObserver {
      */
     @Override
     public void onKeyboardHeight(int height, int keyboardHeight, int orientation) {
-        boolean isShow = (keyboardHeight > 0);
+        float density = Plugin.activity.getResources().getDisplayMetrics().density;
+        int thresholdPx = (int) (100 * density);
+        boolean isShow = (keyboardHeight > thresholdPx);
         JSONObject json = new JSONObject();
         try {
             json.put("action", "KEYBOARD");
