@@ -256,7 +256,7 @@ public class MobileInput {
                 editInputType |= InputType.TYPE_CLASS_PHONE;
                 break;
             default:
-                editInputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
+                editInputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
                 break;
         }
         edit.setInputType(editInputType);
